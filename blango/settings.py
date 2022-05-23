@@ -28,8 +28,8 @@ class Dev(Configuration):
     SECRET_KEY = 'django-insecure-+sn%dpa!086+g+%44z9*^j^q-u4n!j(#wl)x9a%_1op@zz2+1-'
 
     # SECURITY WARNING: don't run with debug turned on in production!
-    DEBUG = values.BooleanValue(True)
-
+    #DEBUG = values.BooleanValue(True)
+    DEBUG = True
     #ALLOWED_HOSTS = ['*']
     ALLOWED_HOSTS = values.ListValue(["localhost", "0.0.0.0", ".codio.io"])
     X_FRAME_OPTIONS = 'ALLOW-FROM ' + os.environ.get('CODIO_HOSTNAME') + '-8000.codio.io'
@@ -52,11 +52,12 @@ class Dev(Configuration):
         'django.contrib.staticfiles',
         'crispy_forms',
         'crispy_bootstrap5',
-
+        'debug_toolbar',
         'blog',
     ]
 
     MIDDLEWARE = [
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
         'django.middleware.security.SecurityMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.middleware.common.CommonMiddleware',
@@ -184,6 +185,14 @@ class Dev(Configuration):
 }
 ADMINS = [("Ben Shaw", "ben@example.com"), ("Leo Lucio", "leo@example.com")]
 DJANGO_ADMINS="Ben Shaw,ben@example.com;Leo Lucio,leo@example.com"
+
+INTERNAL_IPS = ('192.168.10.93',) 
+
+def show_toolbar(request):
+    return True
+DEBUG_TOOLBAR_CONFIG = {
+    "SHOW_TOOLBAR_CALLBACK" : show_toolbar,
+}
 
 
 class Prod(Dev):
