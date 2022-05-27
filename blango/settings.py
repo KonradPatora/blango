@@ -183,18 +183,23 @@ class Dev(Configuration):
     "root": {
         "handlers": ["console"],
         "level": "DEBUG",
-    },
-}
-ADMINS = [("Ben Shaw", "ben@example.com"), ("Leo Lucio", "leo@example.com")]
-DJANGO_ADMINS="Ben Shaw,ben@example.com;Leo Lucio,leo@example.com"
+        },
+    }
+    ADMINS = [("Ben Shaw", "ben@example.com"), ("Leo Lucio", "leo@example.com")]
+    DJANGO_ADMINS="Ben Shaw,ben@example.com;Leo Lucio,leo@example.com"
 
-INTERNAL_IPS = ('192.168.10.93',) 
+    INTERNAL_IPS = ('192.168.11.179',) 
 
-def show_toolbar(request):
-    return True
-DEBUG_TOOLBAR_CONFIG = {
-    "SHOW_TOOLBAR_CALLBACK" : show_toolbar,
-}
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+    ACCOUNT_ACTIVATION_DAYS = 7
+    REGISTRATION_OPEN = True
+
+    def show_toolbar(request):
+        return True
+    DEBUG_TOOLBAR_CONFIG = {
+        "SHOW_TOOLBAR_CALLBACK" : show_toolbar,
+    }
 
 
 class Prod(Dev):
