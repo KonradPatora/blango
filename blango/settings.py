@@ -55,6 +55,7 @@ class Dev(Configuration):
         'crispy_bootstrap5',
         'debug_toolbar',
         'rest_framework',
+        'rest_framework.authtoken',
         'blango_auth',
         'blog',
         'allauth',
@@ -214,6 +215,13 @@ class Dev(Configuration):
         "SHOW_TOOLBAR_CALLBACK" : show_toolbar,
     }
 
+    REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+    ]
+}
 
 class Prod(Dev):
     DEBUG = False
