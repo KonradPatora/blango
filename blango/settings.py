@@ -56,6 +56,7 @@ class Dev(Configuration):
         'debug_toolbar',
         'rest_framework',
         'rest_framework.authtoken',
+        'drf_yasg',
         'blango_auth',
         'blog',
         'allauth',
@@ -214,6 +215,12 @@ class Dev(Configuration):
     DEBUG_TOOLBAR_CONFIG = {
         "SHOW_TOOLBAR_CALLBACK" : show_toolbar,
     }
+    SWAGGER_SETTINGS = {
+        "SECURITY_DEFINITIONS": {
+            "Token": {"type": "apiKey", "name": "Authorization", "in": "header"},
+            "Basic": {"type": "basic"},
+        }
+    }
 
     REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
@@ -224,6 +231,7 @@ class Dev(Configuration):
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticatedOrReadOnly"
     ],
+
 
 }
 
